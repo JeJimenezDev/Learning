@@ -4,6 +4,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.NotFoundException;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 @ApplicationScoped // Esto hace que Quarkus maneje esta clase automáticamente
 public class EquipoService {
@@ -20,6 +21,7 @@ public class EquipoService {
         }
 
         equipo.categoria = cat;
+        equipo.fechaCreacion = java.time.LocalDateTime.now();
         equipo.persist();
         return equipo;
     }
@@ -53,6 +55,14 @@ public class EquipoService {
             dto.marca = e.marca;
             dto.modelo = e.modelo;
             dto.nombreCategoria = (e.categoria != null) ? e.categoria.nombre : "Sin categoría";
+
+            // Ajuste aquí: Solo formatea si la fecha no es nula
+            if (e.fechaCreacion != null) {
+                dto.fechaRegistro = e.fechaCreacion.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+            } else {
+                dto.fechaRegistro = "Fecha no disponible";
+            }
+
             return dto;
         }).toList();
     }

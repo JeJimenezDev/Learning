@@ -1,6 +1,7 @@
 package com.jejimenez;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
@@ -15,4 +16,7 @@ public class Equipo extends PanacheEntity {
 
     @ManyToOne // Muchos equipos pertenecen a una sola categoría
     public Categoria categoria;
+
+    @Column(name = "fecha_creacion", updatable = false)
+    public java.time.LocalDateTime fechaCreacion;
 }
