@@ -21,6 +21,8 @@ public class Equipo extends PanacheEntity {
 
     @NotNull(message = "El equipo debe tener una categoría")
     @ManyToOne
+    @jakarta.json.bind.annotation.JsonbTransient // evitando recursión infinita de equipos pidiendo categoría y
+                                                 // categoría pidiendo equipos
     public Categoria categoria;
 
     @Column(name = "fecha_creacion", updatable = false)
