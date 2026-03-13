@@ -2,6 +2,7 @@ package com.jejimenez;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -37,8 +38,7 @@ public class InventarioResource {
 
     @POST
     @Path("/equipos")
-    public Response crearEquipo(Equipo nuevoEquipo) {
-        // Toda la lógica de validación de categoría debe estar DENTRO de guardarEquipo
+    public Response crearEquipo(@Valid Equipo nuevoEquipo) {
         Equipo guardado = equipoService.guardarEquipo(nuevoEquipo);
         return Response.status(Response.Status.CREATED).entity(guardado).build();
     }
