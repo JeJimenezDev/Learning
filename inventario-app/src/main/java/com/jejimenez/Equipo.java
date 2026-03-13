@@ -28,3 +28,4 @@ public class Equipo extends PanacheEntity {
     @Column(name = "fecha_creacion", updatable = false)
     public LocalDateTime fechaCreacion;
 }
+
